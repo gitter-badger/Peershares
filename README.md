@@ -1,41 +1,85 @@
+Dash Core staging tree 0.11
+===============================
 
-# Peershares Official Development Repo
+[![Join the chat at https://gitter.im/UdjinM6/dash](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/UdjinM6/dash?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-## What is Peershares?
+http://www.dashpay.io
 
-Peershares are an inexpensive and decentralized ledger to be used by businesses for tracking share ownership and distributing dividends in an automated fashion. Shares can be transferred and held just like other cryptocurrency units, such as peercoins or bitcoins.
+Copyright (c) 2009-2015 Bitcoin Core Developers
 
-Using Peershares, individuals, businesses, or organizations of any size could raise funding through an initial offering without depending on a third party such as a stock exchange. While trading shares through exchanges will be useful to provide liquidity, Peershares can be traded on any number of exchanges just as Peercoins can. 
+Copyright (c) 2014-2015 Dash Core Developers
 
-Each business using Peershares will have their own blockchain that is independent of all others. Blockchains can be secured cheaply and easily using Peercoin's proof-of-stake, once the initial (issuer-controlled) quantity of shares have been generated using proof-of-work.
 
-Issuers can distribute dividends as Peercoins, which can then be held by the investors, or if they would prefer, can then take those dividends and convert them to another cryptocurrency or fiat through their preferred exchange.
+What is Dash?
+----------------
 
-A share issuer is not vulnerable to the failure of single stock exchange such as BTC Trading or Litecoin Global. 
+Dash is an experimental new digital currency that enables anonymous, instant
+payments to anyone, anywhere in the world. Dash uses peer-to-peer technology
+to operate with no central authority: managing transactions and issuing money
+are carried out collectively by the network. Dash Core is the name of open
+source software which enables the use of this currency.
 
-### Peershares Resources
-* Source: [Source Code](https://github.com/Peershares/Peershares), [Client Binaries](https://github.com/Peerunity/Peerunity/releases/tag/v0.1.0) (current release: 0.1.0)
-* Documentation: [Peershares Whitepaper](http://www.peercointalk.org/index.php?action=dlattach;topic=527.0;attach=96), [Peershares Wiki](https://github.com/Peershares/Peershares/wiki)
-* Support: [Peershares Forum](http://www.peercointalk.org/index.php?board=61.0)
+For more information, as well as an immediately useable, binary version of
+the Dash Core software, see http://www.dashpay.io/downloads.
 
-### About Peercoin
-[Peercoin](http://peercoin.net/) (abbreviated PPC), also known as PPCoin and Peer-to-Peer Coin is the first [cryptocurrency](https://en.wikipedia.org/wiki/Cryptocurrency) design introducing [proof-of-stake consensus](http://peercoin.net/bin/peercoin-paper.pdf) as a security model, with a combined [proof-of-stake](http://peercoin.net/bin/peercoin-paper.pdf)/[proof-of-work](https://en.wikipedia.org/wiki/Proof-of-work_system) minting system. Peercoin is based on [Bitcoin](http://bitcoin.org/en/), while introducing many important innovations to cryptocurrency field including new security model, energy efficiency, better minting model and more adaptive response to rapid change in network computation power.
 
-### Peercoin Resources
-* Client and Source:
-[Client Binaries](http://sourceforge.net/projects/ppcoin/files/),
-[Source Code](https://github.com/ppcoin/ppcoin)
-* Documentation: [Peercoin Whitepaper](http://peercoin.net/whitepaper),
-[Peercoin Wiki](https://github.com/ppcoin/ppcoin/wiki)
-* Help: 
-[Forum](http://www.peercointalk.org/),
-[Other Sites and Links...](http://www.peercointalk.org/index.php?topic=4.0;topicseen)
+License
+-------
 
-# Repo Guidelines
+Dash Core is released under the terms of the MIT license. See [COPYING](COPYING) for more
+information or see http://opensource.org/licenses/MIT.
 
-* Developers work in their own forks, then submit pull requests when they think their feature or bug fix is ready.
-* If it is a simple/trivial/non-controversial change, then one of the development team members simply pulls it.
-* If it is a more complicated or potentially controversial change, then the change may be discussed in the pull request, or the requester may be asked to start a discussion [Peercoin Talk](http://www.peercointalk.org/) for a broader community discussion. 
-* The patch will be accepted if there is broad consensus that it is a good thing. Developers should expect to rework and resubmit patches if they don't match the project's coding conventions (see coding.txt) or are controversial.
-* From time to time a pull request will become outdated. If this occurs, and the pull is no longer automatically mergeable; a comment on the pull will be used to issue a warning of closure.  Pull requests closed in this manner will have their corresponding issue labeled 'stagnant'.
-* For development ideas and help see [here](http://www.peercointalk.org/index.php?board=10.0).
+
+Building process
+-----------------
+
+**compiling Dash from git**
+
+Use the autogen script to prepare the build environment.
+
+    ./autogen.sh
+    ./configure
+    make
+
+**precompiled binaries**
+
+Precompiled binaries are available at github, see
+https://github.com/dashproject/dash-binaries
+
+Always verify the signatures and checksums.
+
+
+Development tips and tricks
+---------------------------
+
+**compiling for debugging**
+
+Run configure with the --enable-debug option, then make. Or run configure with
+CXXFLAGS="-g -ggdb -O0" or whatever debug flags you need.
+
+**debug.log**
+
+If the code is behaving strangely, take a look in the debug.log file in the data directory;
+error and debugging message are written there.
+
+The -debug=... command-line option controls debugging; running with just -debug will turn
+on all categories (and give you a very large debug.log file).
+
+The Qt code routes qDebug() output to debug.log under category "qt": run with -debug=qt
+to see it.
+
+**testnet and regtest modes**
+
+Run with the -testnet option to run with "play dashs" on the test network, if you
+are testing multi-machine code that needs to operate across the internet.
+
+If you are testing something that can run on one machine, run with the -regtest option.
+In regression test mode blocks can be created on-demand; see qa/rpc-tests/ for tests
+that run in -regtest mode.
+
+**DEBUG_LOCKORDER**
+
+Dash Core is a multithreaded application, and deadlocks or other multithreading bugs
+can be very difficult to track down. Compiling with -DDEBUG_LOCKORDER (configure
+CXXFLAGS="-DDEBUG_LOCKORDER -g") inserts run-time checks to keep track of what locks
+are held, and adds warning to the debug.log file if inconsistencies are detected.
