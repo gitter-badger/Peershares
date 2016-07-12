@@ -1,41 +1,83 @@
+Bitcoin Core integration/staging tree
+=====================================
 
-# Peershares Official Development Repo
+[![Join the chat at https://gitter.im/APCLab/bitcoin](https://badges.gitter.im/APCLab/bitcoin.svg)](https://gitter.im/APCLab/bitcoin?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-## What is Peershares?
+[![Build Status](https://travis-ci.org/bitcoin/bitcoin.svg?branch=master)](https://travis-ci.org/bitcoin/bitcoin)
 
-Peershares are an inexpensive and decentralized ledger to be used by businesses for tracking share ownership and distributing dividends in an automated fashion. Shares can be transferred and held just like other cryptocurrency units, such as peercoins or bitcoins.
+https://bitcoincore.org
 
-Using Peershares, individuals, businesses, or organizations of any size could raise funding through an initial offering without depending on a third party such as a stock exchange. While trading shares through exchanges will be useful to provide liquidity, Peershares can be traded on any number of exchanges just as Peercoins can. 
+What is Bitcoin?
+----------------
 
-Each business using Peershares will have their own blockchain that is independent of all others. Blockchains can be secured cheaply and easily using Peercoin's proof-of-stake, once the initial (issuer-controlled) quantity of shares have been generated using proof-of-work.
+Bitcoin is an experimental digital currency that enables instant payments to
+anyone, anywhere in the world. Bitcoin uses peer-to-peer technology to operate
+with no central authority: managing transactions and issuing money are carried
+out collectively by the network. Bitcoin Core is the name of open source
+software which enables the use of this currency.
 
-Issuers can distribute dividends as Peercoins, which can then be held by the investors, or if they would prefer, can then take those dividends and convert them to another cryptocurrency or fiat through their preferred exchange.
+For more information, as well as an immediately useable, binary version of
+the Bitcoin Core software, see https://bitcoin.org/en/download, or read the
+[original whitepaper](https://bitcoincore.org/bitcoin.pdf).
 
-A share issuer is not vulnerable to the failure of single stock exchange such as BTC Trading or Litecoin Global. 
+License
+-------
 
-### Peershares Resources
-* Source: [Source Code](https://github.com/Peershares/Peershares), [Client Binaries](https://github.com/Peerunity/Peerunity/releases/tag/v0.1.0) (current release: 0.1.0)
-* Documentation: [Peershares Whitepaper](http://www.peercointalk.org/index.php?action=dlattach;topic=527.0;attach=96), [Peershares Wiki](https://github.com/Peershares/Peershares/wiki)
-* Support: [Peershares Forum](http://www.peercointalk.org/index.php?board=61.0)
+Bitcoin Core is released under the terms of the MIT license. See [COPYING](COPYING) for more
+information or see https://opensource.org/licenses/MIT.
 
-### About Peercoin
-[Peercoin](http://peercoin.net/) (abbreviated PPC), also known as PPCoin and Peer-to-Peer Coin is the first [cryptocurrency](https://en.wikipedia.org/wiki/Cryptocurrency) design introducing [proof-of-stake consensus](http://peercoin.net/bin/peercoin-paper.pdf) as a security model, with a combined [proof-of-stake](http://peercoin.net/bin/peercoin-paper.pdf)/[proof-of-work](https://en.wikipedia.org/wiki/Proof-of-work_system) minting system. Peercoin is based on [Bitcoin](http://bitcoin.org/en/), while introducing many important innovations to cryptocurrency field including new security model, energy efficiency, better minting model and more adaptive response to rapid change in network computation power.
+Development Process
+-------------------
 
-### Peercoin Resources
-* Client and Source:
-[Client Binaries](http://sourceforge.net/projects/ppcoin/files/),
-[Source Code](https://github.com/ppcoin/ppcoin)
-* Documentation: [Peercoin Whitepaper](http://peercoin.net/whitepaper),
-[Peercoin Wiki](https://github.com/ppcoin/ppcoin/wiki)
-* Help: 
-[Forum](http://www.peercointalk.org/),
-[Other Sites and Links...](http://www.peercointalk.org/index.php?topic=4.0;topicseen)
+The `master` branch is regularly built and tested, but is not guaranteed to be
+completely stable. [Tags](https://github.com/bitcoin/bitcoin/tags) are created
+regularly to indicate new official, stable release versions of Bitcoin Core.
 
-# Repo Guidelines
+The contribution workflow is described in [CONTRIBUTING.md](CONTRIBUTING.md).
 
-* Developers work in their own forks, then submit pull requests when they think their feature or bug fix is ready.
-* If it is a simple/trivial/non-controversial change, then one of the development team members simply pulls it.
-* If it is a more complicated or potentially controversial change, then the change may be discussed in the pull request, or the requester may be asked to start a discussion [Peercoin Talk](http://www.peercointalk.org/) for a broader community discussion. 
-* The patch will be accepted if there is broad consensus that it is a good thing. Developers should expect to rework and resubmit patches if they don't match the project's coding conventions (see coding.txt) or are controversial.
-* From time to time a pull request will become outdated. If this occurs, and the pull is no longer automatically mergeable; a comment on the pull will be used to issue a warning of closure.  Pull requests closed in this manner will have their corresponding issue labeled 'stagnant'.
-* For development ideas and help see [here](http://www.peercointalk.org/index.php?board=10.0).
+The developer [mailing list](https://lists.linuxfoundation.org/mailman/listinfo/bitcoin-dev)
+should be used to discuss complicated or controversial changes before working
+on a patch set.
+
+Developer IRC can be found on Freenode at #bitcoin-core-dev.
+
+Testing
+-------
+
+Testing and code review is the bottleneck for development; we get more pull
+requests than we can review and test on short notice. Please be patient and help out by testing
+other people's pull requests, and remember this is a security-critical project where any mistake might cost people
+lots of money.
+
+### Automated Testing
+
+Developers are strongly encouraged to write [unit tests](/doc/unit-tests.md) for new code, and to
+submit new unit tests for old code. Unit tests can be compiled and run
+(assuming they weren't disabled in configure) with: `make check`
+
+There are also [regression and integration tests](/qa) of the RPC interface, written
+in Python, that are run automatically on the build server.
+These tests can be run (if the [test dependencies](/qa) are installed) with: `qa/pull-tester/rpc-tests.py`
+
+The Travis CI system makes sure that every pull request is built for Windows, Linux, and OS X, and that unit/sanity tests are run automatically.
+
+### Manual Quality Assurance (QA) Testing
+
+Changes should be tested by somebody other than the developer who wrote the
+code. This is especially important for large or high-risk changes. It is useful
+to add a test plan to the pull request description if testing the changes is
+not straightforward.
+
+Translations
+------------
+
+Changes to translations as well as new translations can be submitted to
+[Bitcoin Core's Transifex page](https://www.transifex.com/projects/p/bitcoin/).
+
+Translations are periodically pulled from Transifex and merged into the git repository. See the
+[translation process](doc/translation_process.md) for details on how this works.
+
+**Important**: We do not accept translation changes as GitHub pull requests because the next
+pull from Transifex would automatically overwrite them again.
+
+Translators should also subscribe to the [mailing list](https://groups.google.com/forum/#!forum/bitcoin-translators).
